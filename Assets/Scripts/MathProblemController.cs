@@ -16,6 +16,8 @@ public class MathProblemController : MonoBehaviour
     float timeRemaining = 5;
 
     private float maxTimeRemaining = 5;
+
+    private Button button;
     
 
 
@@ -54,6 +56,12 @@ public class MathProblemController : MonoBehaviour
 
     public IEnumerator MathsProblemInstantiate()
     {
+
+        button = GetComponent<Button>();
+
+        button.enabled = false;
+        button.GetComponent<Image>().color = new Color(255, 255, 255, 0.5f);
+        
         mathAddresable = Addressables.LoadAssetAsync<GameObject>(key);
 
         yield return mathAddresable;
@@ -67,6 +75,10 @@ public class MathProblemController : MonoBehaviour
             Addressables.Release(gameObject);
             
             timeRemaining = maxTimeRemaining;
+            
+            button.enabled = true;
+            
+            button.GetComponent<Image>().color = new Color(255, 255, 255, 1f);
             
            
         }

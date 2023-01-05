@@ -5,8 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/FightScene.unity
+    guid: a0e93283cc5b3cb42a415809ffc929cc
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c41c4bc71f99c454e8d60bb976c2b315, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: e708490c70bee274d9ad0be6a1eb1e53, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: d41ab6cd431aaf94eb566ce3235245ef, type: 2}
