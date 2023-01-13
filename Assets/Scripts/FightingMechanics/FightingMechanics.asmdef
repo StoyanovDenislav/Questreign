@@ -1,0 +1,16 @@
+{
+    "name": "FightingMechanics",
+    "rootNamespace": "",
+    "references": [
+        "GUID:772ad982a858e0747805f122ff7f4eec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -29,41 +29,43 @@ public class selectCharacter : MonoBehaviour
         }
 
 
+        /*if (Input.GetMouseButtonDown(0) && Time.time > pressDelay)
+        {
+            GoToCharacter();
+        }
+
+
         if (Input.GetTouch(0).phase == TouchPhase.Began && Time.time > pressDelay)
         {
             GoToCharacter();
-        }
-
-
-        if (Input.GetMouseButtonDown(0) && Time.time > pressDelay)
-        {
-            GoToCharacter();
-        }
+        }*/
     }
 
-    void GoToCharacter()
+    public void GoToCharacter()
     {
         GameObject go2 = GameObject.Find("enemy");
+        
+        GameObject goz = activeGo;
 
-        RaycastHit2D raycastHit =
+        goz.transform.position = activeGo.transform.position;
+
+        LeanTween.move(activeGo, go2.transform.position, 0.2f);
+
+        LeanTween.move(activeGo, goz.transform.position, 0.2f).delay = 0.3f;
+
+        HelpersInScene.currentlySelectedCharacter++;
+
+        HelpersInScene.CheckNewCharacter();
+
+        pressDelay = Time.time + 1f;
+
+       /* RaycastHit2D raycastHit =
             Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
 
         if (raycastHit.transform.gameObject != null)
         {
-            GameObject goz = activeGo;
-
-            goz.transform.position = activeGo.transform.position;
-
-            LeanTween.move(activeGo, go2.transform.position, 0.2f);
-
-            LeanTween.move(activeGo, goz.transform.position, 0.2f).delay = 0.3f;
-
-            HelpersInScene.currentlySelectedCharacter++;
-
-            HelpersInScene.CheckNewCharacter();
-
-            pressDelay = Time.time + 1f;
-        }
+          
+        }*/
     }
 }

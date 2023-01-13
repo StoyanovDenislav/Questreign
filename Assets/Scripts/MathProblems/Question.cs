@@ -16,6 +16,7 @@ public class Question : MonoBehaviour
     public List<Button> buttons = new List<Button>();
     
     
+    
 
     private void Start()
     {
@@ -73,21 +74,22 @@ public class Question : MonoBehaviour
 
     public void GenerateAnswers()
     {
-        List<float> numbers = new List<float> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        List<float> numbers = new List<float> {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // declaring numbers
         List<float> usedNums = new List<float>();
 
-        numbers.Remove(answer);
-        usedNums.Add(answer);
+        numbers.Remove(answer); // removing the answer from all numbers
+        usedNums.Add(answer); // adding the answer to all numbers
 
 
         for (int i = 0; i < buttons.Count - 1; i++)
         {
-            float num = Random.Range(0, numbers.Count + 1);
+            float num = Random.Range(0, numbers.Count + 1); //choosing a random number between 0 and the count of the numbers + 1, because of the way Random.Range works
             if (usedNums.Contains(num))
             {
                 do
                 {
                     num = Random.Range(0, numbers.Count + 1);
+                    
                 } while (usedNums.Contains(num));
             }
 
