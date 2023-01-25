@@ -11,12 +11,16 @@ public class Drop : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         
-        if (eventData.pointerDrag != null)
+        
+        eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+        eventData.pointerDrag.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>().transform.parent, false);
+     
+        /*if (eventData.pointerDrag != null)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-            eventData.pointerDrag.GetComponent<RectTransform>().SetParent(FindObjectOfType<Button>().GetComponent<RectTransform>().transform.parent, worldPositionStays: false);
+            
+            
           
           
-        }
+        }*/
     }
 }

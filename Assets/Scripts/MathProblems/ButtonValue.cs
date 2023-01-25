@@ -25,7 +25,7 @@ public class ButtonValue : MonoBehaviour
     {
         SelectCharacter = FindObjectOfType<selectCharacter>();
 
-        if (question.answer == value)
+        if (question.answer == value || question.answer == question.InputFieldAnswer)
         {
             gltext.text = "Correct!";
 
@@ -33,11 +33,9 @@ public class ButtonValue : MonoBehaviour
         }
         else
         {
-            
-            gltext.text = "Wrong!";
             AlphaChange();
-           
-            
+
+            gltext.text = "Wrong!";
         }
 
         question.HasAnswered = true;
@@ -45,34 +43,42 @@ public class ButtonValue : MonoBehaviour
         //  Invoke("HasAnswered", 1);
     }
 
-    void AlphaChange()
+    public void AlphaChange()
     {
+       
+        HelpersInScene.currentlySelectedCharacter++;
+        HelpersInScene.CheckNewCharacter();
 
-
-
-
-
-        LeanTween.alpha(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter], 0,
-            0.5f).setOnComplete(() =>
+        switch (HelpersInScene.helpersAvailableInScene.IndexOf(
+            HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter]) == 0)
         {
-            for (int i = 0; i < HelpersInScene.helpersAvailableInScene.Count; i++)
+
+
+            case true:
+                LeanTween.alpha(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter], 0,
+                    0.5f).setOnComplete(() =>
+                {
+                    HelpersInScene.helpersAvailableInScene.RemoveAt(HelpersInScene.currentlySelectedCharacter);
+                });
+                break;
+                
+                case false:
             {
-                if (HelpersInScene.helpersAvailableInScene[i].gameObject.GetComponent<helperID>().ID ==
-                    HelpersInScene.currentlySelectedCharacter - 1)
+                LeanTween.alpha(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter - 1],
+                    0,
+                    0.5f).setOnComplete(() =>
                 {
                     HelpersInScene.helpersAvailableInScene.RemoveAt(HelpersInScene.currentlySelectedCharacter - 1);
-                    Debug.Log("Removed from list");
-                   // Destroy(HelpersInScene.helpersAvailableInScene[i].gameObject);
-                    Debug.Log("Destroyed");
-                    break;
-                }
+                });
+
+                break;
             }
-        });
+        }
+
+
 
         //  HelpersInScene.helpersAvailableInScene.Remove(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter - 1].gameObject);
         //  Destroy(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter - 1].gameObject);
-
-        
 
 
         /*  else if (HelpersInScene.helpersAvailableInScene.Count <= 1)

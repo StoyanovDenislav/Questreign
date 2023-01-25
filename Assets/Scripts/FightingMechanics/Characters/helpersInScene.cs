@@ -48,13 +48,13 @@ public class helpersInScene : MonoBehaviour
 
     private void Update()
     {
-        triangle.transform.position =new Vector3(triangle.transform.position.x, Mathf.PingPong(Time.time*2,max-min)+min, triangle.transform.position.z);
+        triangle.transform.position = new Vector3(triangle.transform.position.x, Mathf.PingPong(Time.time*2,max-min)+min, triangle.transform.position.z);
     }
 
 
     public void CheckNewCharacter()
     {
-        if (currentlySelectedCharacter >= 4)
+        if (currentlySelectedCharacter >= helpersAvailableInScene.Count)
         {
             currentlySelectedCharacter = 0;
             ChangeSelectedCharacter();
@@ -74,4 +74,6 @@ public class helpersInScene : MonoBehaviour
         triangle.transform.position = new Vector3(firstHelper.position.x,
             firstHelper.GetComponent<SpriteRenderer>().bounds.size.y / 2 - 2, 0);
     }
+   
+   
 }
