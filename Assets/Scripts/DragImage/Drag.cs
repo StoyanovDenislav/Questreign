@@ -11,7 +11,10 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     private Canvas canvas;
     private CanvasGroup CanvasGroup;
     private RectTransform rectTransform;
-    
+
+
+    public RectTransform starterParent;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -22,35 +25,20 @@ public class Drag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     // Update is called once per frame
-    
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         CanvasGroup.blocksRaycasts = false;
-        
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-     
-        
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        Debug.Log(eventData.delta);
-        Debug.Log(eventData.pointerCurrentRaycast);
-
-        
-
-        
-
-
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
         CanvasGroup.blocksRaycasts = true;
-        
     }
-
-    
 }

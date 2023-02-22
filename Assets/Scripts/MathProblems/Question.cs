@@ -10,29 +10,27 @@ using Random = UnityEngine.Random;
 public class Question : MonoBehaviour
 {
     public TextMeshProUGUI text;
-    
+
     public List<float> numbers = new List<float>();
-    
+
     public float answer;
-    
+
     private float timeToNextAddition;
-    
+
     public bool HasAnswered = false;
-    
+
     public List<Button> buttons = new List<Button>();
-    
+
     [SerializeField] TMP_InputField m_InputField;
 
     private ButtonValue btnVal;
-
-    private selectCharacter SelectCharacter;
 
     public float InputFieldAnswer;
 
     private void Start()
     {
         btnVal = FindObjectOfType<ButtonValue>();
-        SelectCharacter = FindObjectOfType<selectCharacter>();
+       
 
         switch (buttons.Count > 0)
         {
@@ -61,27 +59,8 @@ public class Question : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return) && m_InputField.text.Length > 0)
         {
             InputFieldAnswer = int.Parse(m_InputField.text);
-
-            switch (answer == InputFieldAnswer)
-            {
-                case true:
-
-                    btnVal.gltext.text = "Correct!";
-
-                    SelectCharacter.GoToCharacter();
-
-                    break;
-
-                case false:
-
-                    btnVal.AlphaChange();
-
-                    btnVal.gltext.text = "Wrong!";
-
-                    break;
-            }
-
-            HasAnswered = true;
+            
+            btnVal.SubmitAnswer();
         }
     }
 
@@ -129,7 +108,7 @@ public class Question : MonoBehaviour
         }
 
         Shuffle(usedNums);
-        
+
         try
         {
             for (int i = 0; i < buttons.Count; i++)
@@ -138,12 +117,10 @@ public class Question : MonoBehaviour
                 buttons[i].GetComponent<ButtonValue>().value = usedNums[i];
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             throw e;
         }
-
-       
     }
 
     void Shuffle<T>(IList<T> ts)

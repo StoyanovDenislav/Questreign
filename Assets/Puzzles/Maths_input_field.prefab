@@ -998,6 +998,7 @@ GameObject:
   - component: {fileID: 297170771662049710}
   - component: {fileID: 297170771662049711}
   - component: {fileID: 272670815827390366}
+  - component: {fileID: 8862004453938264457}
   m_Layer: 5
   m_Name: Maths_input_field
   m_TagString: Untagged
@@ -1130,6 +1131,21 @@ MonoBehaviour:
   text: {fileID: 3416886745251137794}
   gltext: {fileID: 4466341868444037435}
   hasSelected: 0
+  puzzleIsDone: 0
+--- !u!114 &8862004453938264457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893045902973988550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bcb4baa9b10544b8240739c476dae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solveTime: 5
+  maxTime: 5
 --- !u!1 &7054832609506554361
 GameObject:
   m_ObjectHideFlags: 0

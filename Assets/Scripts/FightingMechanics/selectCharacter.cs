@@ -44,7 +44,7 @@ public class selectCharacter : MonoBehaviour
     public void GoToCharacter()
     {
         GameObject go2 = GameObject.Find("enemy");
-        
+
         GameObject goz = activeGo;
 
         goz.transform.position = activeGo.transform.position;
@@ -58,14 +58,5 @@ public class selectCharacter : MonoBehaviour
         HelpersInScene.CheckNewCharacter();
 
         pressDelay = Time.time + 1f;
-
-       /* RaycastHit2D raycastHit =
-            Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-
-        if (raycastHit.transform.gameObject != null)
-        {
-          
-        }*/
     }
 }

@@ -12,7 +12,14 @@ public class ButtonRotation : MonoBehaviour
     private float rotation;
 
     private RotationKeeper RotationKeeper;
-    
+
+    CheckTimeAndCompletion checkIfSolved;
+
+    void Start()
+    {
+        checkIfSolved = FindObjectOfType<CheckTimeAndCompletion>();
+    }
+
     public void Rotation()
     {
         _button = gameObject.GetComponent<Button>();
@@ -43,36 +50,30 @@ public class ButtonRotation : MonoBehaviour
 
     public void CheckAll()
     {
-
         RotationKeeper = FindObjectOfType<RotationKeeper>();
-        
-        
+
+
         for (int i = 0; i < RotationKeeper.buttons.Count; i++)
         {
-            RotationKeeper.rotations[i] = (int)RotationKeeper.buttons[i].GetComponent<Button>().transform.rotation.normalized.eulerAngles.z;
-           
+            RotationKeeper.rotations[i] = (int) RotationKeeper.buttons[i].GetComponent<Button>().transform.rotation
+                .normalized.eulerAngles.z;
         }
 
         bool isAllEqual = RotationKeeper.rotations.Count > 0 && RotationKeeper.rotations.All(x => x == 0);
-        
- 
+
+
         if (isAllEqual)
         {
-            StartCoroutine(waitBeforeRandom());
-            
+            checkIfSolved.puzzleIsDone = true;
         }
-        
-        
- 
     }
 
-    IEnumerator waitBeforeRandom()
+    /*IEnumerator waitBeforeRandom()
     {
         RandomRotationButton rotationButton = FindObjectOfType<RandomRotationButton>();
 
         yield return new WaitForSeconds(3);
 
         rotationButton.RandomRotation();
-    }
+    }*/
 }
-
