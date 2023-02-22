@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+
 
 public class MathProblemController : MonoBehaviour
 {
-    private string key = "Maths_input_field";
+    private string[] keyArr = {"Maths_input_field", "Maths"};
 
-    AsyncOperationHandle<GameObject> mathAddresable;
+    private int number = 0;
+
+    private string key;
+
+        AsyncOperationHandle<GameObject> mathAddresable;
 
     private Question answeredQuestion;
 
@@ -27,9 +33,11 @@ public class MathProblemController : MonoBehaviour
 
     public void StartProblem()
     {
+        number = Random.Range(0, 2);
+        key = keyArr[number];
         StartCoroutine(MathsProblemInstantiate());
         
-       
+
     }
 
     void Update()

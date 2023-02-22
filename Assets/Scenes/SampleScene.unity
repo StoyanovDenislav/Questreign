@@ -719,6 +719,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1983662030377068188, guid: 74932611f9a8c044cb73ea1b46e10df6, type: 3}
+      propertyPath: m_TagString
+      value: GridDragAndDropPuzzle
+      objectReference: {fileID: 0}
     - target: {fileID: 7045322750179791822, guid: 74932611f9a8c044cb73ea1b46e10df6, type: 3}
       propertyPath: m_Name
       value: PuzzleRotate

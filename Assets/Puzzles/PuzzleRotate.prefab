@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1983662029122223153}
   m_Layer: 5
   m_Name: Button (3)
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662029198425702
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ GameObject:
   - component: {fileID: 1983662029198425704}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662029666328743
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +297,7 @@ GameObject:
   - component: {fileID: 1983662029666328745}
   m_Layer: 5
   m_Name: Button (1)
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662030016382177
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,7 +432,7 @@ GameObject:
   - component: {fileID: 1983662030016382187}
   m_Layer: 5
   m_Name: Button (6)
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -560,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662030349272389
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +579,7 @@ GameObject:
   - component: {fileID: 1983662030349272399}
   m_Layer: 5
   m_Name: Button (4)
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -706,6 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662030377068188
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,6 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662030590346658
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,7 +873,7 @@ GameObject:
   - component: {fileID: 1983662030590346660}
   m_Layer: 5
   m_Name: Button (5)
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -998,6 +1004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662030829539776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,7 +1020,7 @@ GameObject:
   - component: {fileID: 1983662030829539786}
   m_Layer: 5
   m_Name: Button (2)
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1144,6 +1151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &1983662030942945033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1159,7 +1167,7 @@ GameObject:
   - component: {fileID: 1983662030942945139}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: GridDragAndDropPuzzle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1290,6 +1298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152038cc820549d41bdc040b4dcc6fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  starterObject: {fileID: 0}
 --- !u!1 &7045322750179791822
 GameObject:
   m_ObjectHideFlags: 0
