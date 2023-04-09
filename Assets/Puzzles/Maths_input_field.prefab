@@ -1131,7 +1131,6 @@ MonoBehaviour:
   text: {fileID: 3416886745251137794}
   gltext: {fileID: 4466341868444037435}
   hasSelected: 0
-  puzzleIsDone: 0
 --- !u!114 &8862004453938264457
 MonoBehaviour:
   m_ObjectHideFlags: 0

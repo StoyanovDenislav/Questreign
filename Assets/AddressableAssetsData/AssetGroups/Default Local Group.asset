@@ -41,6 +41,10 @@ MonoBehaviour:
     m_Address: RotatingImage
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1cf590bc2bc819944b094cedfca24da7
+    m_Address: image1RotatingPuzzle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 993f0f82141a48b4fb4851cd3dd8cce1, type: 2}
   m_SchemaSet:

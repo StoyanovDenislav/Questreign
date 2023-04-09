@@ -47,7 +47,7 @@ public class InstantiateTutorials : MonoBehaviour
                 HasIntiated = true;
             }
 
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime; 
         }
     }
 

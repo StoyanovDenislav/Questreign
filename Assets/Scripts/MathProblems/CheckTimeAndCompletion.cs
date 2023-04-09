@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class CheckTimeAndCompletion : MonoBehaviour
 {
-    private selectCharacter SelectCharacter;
-    private helpersInScene HelpersInScene;
+    private selectCharacter SelectCharacter { get; set; }
+    private helpersInScene HelpersInScene { get; set; }
     public bool puzzleIsDone = false;
-    private Question question;
-    public float value;
+    private Question question { get; set; }
+    public float value { get; set; }
+    public float currentPuzzleID { get; set; }
+
+    public string NumberString = "";
+
+    public bool puzzleHasBeenUnloaded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -16,67 +21,65 @@ public class CheckTimeAndCompletion : MonoBehaviour
         HelpersInScene = FindObjectOfType<helpersInScene>();
 
         SelectCharacter = FindObjectOfType<selectCharacter>();
+
+        if (PlayerPrefs.GetString("MainString") != null) NumberString = PlayerPrefs.GetString("MainString");
     }
-    
+
 
     public void PuzzleHasFinished()
     {
-        if (puzzleIsDone) SelectCharacter.GoToCharacter();
+        puzzleHasBeenUnloaded = false;
+        
+        if (puzzleIsDone)
+        {
+            SelectCharacter.GoToCharacter();
+
+            StartCoroutine(setToFalse());
+        }
         else AlphaChange();
     }
 
 
     public void AlphaChange()
     {
-        HelpersInScene.currentlySelectedCharacter++;
-        HelpersInScene.CheckNewCharacter();
+       
+       int removedCharacterIndex = HelpersInScene.currentlySelectedCharacter;
+       HelpersInScene.currentlySelectedCharacter++;
+       HelpersInScene.CheckNewCharacter();
 
-        switch (HelpersInScene.helpersAvailableInScene.IndexOf(
-            HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter]) == 0)
-        {
-            case true:
+       switch (removedCharacterIndex)
+       {
+           case 0:
+               LeanTween.alpha(HelpersInScene.helpersAvailableInScene[0], 0, 0.5f).setOnComplete(() =>
+               {
+                   HelpersInScene.helpersAvailableInScene.RemoveAt(0);
+                   if (HelpersInScene.helpersAvailableInScene.Count > 0)
+                   {
+                       HelpersInScene.currentlySelectedCharacter = 0;
+                   }
+               });
+               break;
 
+           default:
+               if (HelpersInScene.helpersAvailableInScene.Count > removedCharacterIndex)
+               {
+                   LeanTween.alpha(HelpersInScene.helpersAvailableInScene[removedCharacterIndex], 0, 0.5f).setOnComplete(() =>
+                   {
+                       HelpersInScene.helpersAvailableInScene.RemoveAt(removedCharacterIndex);
+                       HelpersInScene.currentlySelectedCharacter = removedCharacterIndex;
+                   });
+               }
+               break;
+       }
+    
+    }
 
-                LeanTween.alpha(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter], 0,
-                    0.5f).setOnComplete(() =>
-                {
-                    
-                    HelpersInScene.helpersAvailableInScene.RemoveAt(HelpersInScene.currentlySelectedCharacter);
-                    
-                    
-                });
+    IEnumerator setToFalse()
+    {
+        yield return new WaitUntil(() => puzzleHasBeenUnloaded);
 
-
-                break;
-
-            case false:
-            {
-                LeanTween.alpha(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter - 1],
-                    0,
-                    0.5f).setOnComplete(() =>
-                {
-                  
-                    HelpersInScene.helpersAvailableInScene.RemoveAt(HelpersInScene.currentlySelectedCharacter - 1);
-                });
-
-                break;
-            }
-        }
+        puzzleIsDone = false;
     }
 }
 
-//  HelpersInScene.helpersAvailableInScene.Remove(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter - 1].gameObject);
-//  Destroy(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter - 1].gameObject);
 
-
-/*  else if (HelpersInScene.helpersAvailableInScene.Count <= 1)
-  {
-      for (int i = 0; i < HelpersInScene.helpersAvailableInScene.Count; i++)
-      {
-          HelpersInScene.helpersAvailableInScene.RemoveAt(i);
-      }
-
-      yield return new WaitUntil(() => LeanTween.alpha(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter], 0, 0.5f).destroyOnComplete);
-      
-      Destroy(HelpersInScene.helpersAvailableInScene[HelpersInScene.currentlySelectedCharacter]);
-  }*/

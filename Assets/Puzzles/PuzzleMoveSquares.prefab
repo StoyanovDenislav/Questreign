@@ -1698,7 +1698,7 @@ GameObject:
   - component: {fileID: 1983662029859794085}
   - component: {fileID: 2610232097495947636}
   m_Layer: 5
-  m_Name: PuzzleRotate
+  m_Name: PuzzleMoveSquares
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

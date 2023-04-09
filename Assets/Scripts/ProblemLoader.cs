@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -10,7 +12,16 @@ using Random = UnityEngine.Random;
 
 public class ProblemLoader : MonoBehaviour
 {
-    private string[] keyArr = {"Maths", "Maths_input_field"/*, "PuzzleRotate", "RotatingImage"*/};
+    public Dictionary<string, int> keyArr = new Dictionary<string, int>()
+    {
+        {"Maths", 0},
+        {"Maths_input_field", 1},
+        {"RotatingImage", 2}
+    };
+
+    public List<int> puzzleOrder;
+
+    //  public string[] keyArr = {"Maths"};
 
     private int number { get; set; }
 
@@ -35,17 +46,66 @@ public class ProblemLoader : MonoBehaviour
     private GameObject currentPuzzle { get; set; }
 
 
+    private CollectMistakes _collectMistakes = null;
+
+    private int indexer = 0;
+
     private void Start()
     {
         btnVal = FindObjectOfType<CheckTimeAndCompletion>();
+        currentPuzzle = null;
+        _collectMistakes = FindObjectOfType<CollectMistakes>();
     }
 
     public void StartProblem()
     {
-        number = Random.Range(0, keyArr.Length);
-        key = keyArr[number];
+        if (indexer >= puzzleOrder.Count) indexer = 0;
+
+        puzzleOrder.Clear();
+
+        switch (btnVal.NumberString.Length > 10)
+        {
+            case true:
+
+                List<int> repeatCounts = new List<int>();
+
+                for (int i = 0; i < keyArr.Count; i++)
+                {
+                    repeatCounts.Add(keyArr.Count - i);
+                }
+
+                int index = 0;
+
+                foreach (var pair in _collectMistakes.sortedCounts)
+                {
+                    int repeatCount = repeatCounts[Mathf.Min(index, repeatCounts.Count - 1)];
+                    
+                    for (int i = 0; i < repeatCount; i++)
+                    {
+                        puzzleOrder.Add(pair.Key);
+                    }
+
+                    index++;
+                }
+
+                break;
+
+            default:
+
+                for (int i = 0; i < keyArr.Count; i++)
+                {
+                    puzzleOrder.Add(i);
+                }
+
+                break;
+        }
+
+        key = keyArr.Keys.ElementAt(puzzleOrder[indexer]);
+
+
         StartCoroutine(ProblemInstantiate());
     }
+
 
     void Update()
     {
@@ -58,11 +118,21 @@ public class ProblemLoader : MonoBehaviour
                 {
                     case true:
                         timeRemaining = 0;
-                       
+
                         break;
                     default:
                         timeRemaining -= Time.deltaTime;
                         break;
+                }
+
+                if (timeRemaining <= 0 && !btnVal.puzzleIsDone && currentPuzzle != null)
+                {
+                    btnVal.AlphaChange();
+
+                    btnVal.NumberString += btnVal.currentPuzzleID;
+                    PlayerPrefs.SetString("MainString", btnVal.NumberString);
+
+                    _collectMistakes.GetMostMistakes();
                 }
 
                 break;
@@ -78,6 +148,16 @@ public class ProblemLoader : MonoBehaviour
                         break;
                 }
 
+                if (timeRemaining <= 0 && !answeredQuestion.HasAnswered && currentPuzzle != null)
+                {
+                    btnVal.AlphaChange();
+
+                    btnVal.NumberString += btnVal.currentPuzzleID;
+                    PlayerPrefs.SetString("MainString", btnVal.NumberString);
+
+                    _collectMistakes.GetMostMistakes();
+                }
+
                 break;
         }
 
@@ -87,8 +167,10 @@ public class ProblemLoader : MonoBehaviour
             currentPuzzle.GetComponentInChildren<Slider>().value = timeRemaining;
         }
 
+        PlayerPrefs.Save();
+
+
        
-        
     }
 
 
@@ -109,19 +191,23 @@ public class ProblemLoader : MonoBehaviour
 
             currentPuzzle = gameObject.Result.gameObject;
 
-            timeRemaining = maxTimeRemaining = gameObject.Result.GetComponent<SetTimeComponents>().maxTime;
+            timeRemaining = maxTimeRemaining = currentPuzzle.GetComponent<SetTimeComponents>().maxTime;
+
+            btnVal.currentPuzzleID = keyArr.Values.ElementAt(puzzleOrder[indexer]);
 
             yield return new WaitUntil(() => timeRemaining <= 0);
 
             Addressables.Release(gameObject);
 
-            timeRemaining = maxTimeRemaining;
-
             button.enabled = true;
 
             currentPuzzle = null;
 
+            btnVal.puzzleHasBeenUnloaded = true;
+
             button.GetComponent<Image>().color = new Color(255, 255, 255, 1f);
+
+            indexer++;
         }
     }
 }

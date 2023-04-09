@@ -65,6 +65,7 @@ public class ButtonRotation : MonoBehaviour
         if (isAllEqual)
         {
             checkIfSolved.puzzleIsDone = true;
+            checkIfSolved.PuzzleHasFinished();
         }
     }
 

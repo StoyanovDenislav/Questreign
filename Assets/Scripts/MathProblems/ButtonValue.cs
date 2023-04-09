@@ -14,6 +14,7 @@ public class ButtonValue : MonoBehaviour
     private selectCharacter SelectCharacter;
     private helpersInScene HelpersInScene;
     private CheckTimeAndCompletion _checkTimeAndCompletion;
+    
 
 
     public void Start()
@@ -21,6 +22,7 @@ public class ButtonValue : MonoBehaviour
         question = FindObjectOfType<Question>();
         HelpersInScene = FindObjectOfType<helpersInScene>();
         _checkTimeAndCompletion = FindObjectOfType<CheckTimeAndCompletion>();
+       
     }
 
     public void SubmitAnswer()
@@ -34,6 +36,9 @@ public class ButtonValue : MonoBehaviour
         else
         {
             _checkTimeAndCompletion.AlphaChange();
+            _checkTimeAndCompletion.NumberString +=  _checkTimeAndCompletion.currentPuzzleID;
+            PlayerPrefs.SetString("MainString", _checkTimeAndCompletion.NumberString);
+            
         }
 
         question.HasAnswered = true;
