@@ -66,6 +66,7 @@ public class ProblemLoader : MonoBehaviour
         {
             btnVal.NumberString = SaveSystem.LoadNumberString().stringData;
         }
+        else btnVal.NumberString = "";
         
         if (indexer >= puzzleOrder.Count) indexer = 0;
 
