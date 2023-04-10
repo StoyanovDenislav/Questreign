@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -55,10 +56,17 @@ public class ProblemLoader : MonoBehaviour
         btnVal = FindObjectOfType<CheckTimeAndCompletion>();
         currentPuzzle = null;
         _collectMistakes = FindObjectOfType<CollectMistakes>();
+
+        
     }
 
     public void StartProblem()
     {
+        if (File.Exists(Application.persistentDataPath + "/string.dat"))
+        {
+            btnVal.NumberString = SaveSystem.LoadNumberString().stringData;
+        }
+        
         if (indexer >= puzzleOrder.Count) indexer = 0;
 
         puzzleOrder.Clear();
@@ -79,7 +87,7 @@ public class ProblemLoader : MonoBehaviour
                 foreach (var pair in _collectMistakes.sortedCounts)
                 {
                     int repeatCount = repeatCounts[Mathf.Min(index, repeatCounts.Count - 1)];
-                    
+
                     for (int i = 0; i < repeatCount; i++)
                     {
                         puzzleOrder.Add(pair.Key);
@@ -130,8 +138,8 @@ public class ProblemLoader : MonoBehaviour
                     btnVal.AlphaChange();
 
                     btnVal.NumberString += btnVal.currentPuzzleID;
-                    PlayerPrefs.SetString("MainString", btnVal.NumberString);
-
+                    
+                    SaveSystem.SaveNumberString(btnVal.NumberString);
                     _collectMistakes.GetMostMistakes();
                 }
 
@@ -153,7 +161,8 @@ public class ProblemLoader : MonoBehaviour
                     btnVal.AlphaChange();
 
                     btnVal.NumberString += btnVal.currentPuzzleID;
-                    PlayerPrefs.SetString("MainString", btnVal.NumberString);
+
+                    SaveSystem.SaveNumberString(btnVal.NumberString);
 
                     _collectMistakes.GetMostMistakes();
                 }
@@ -166,11 +175,6 @@ public class ProblemLoader : MonoBehaviour
             currentPuzzle.GetComponentInChildren<Slider>().maxValue = maxTimeRemaining;
             currentPuzzle.GetComponentInChildren<Slider>().value = timeRemaining;
         }
-
-        PlayerPrefs.Save();
-
-
-       
     }
 
 

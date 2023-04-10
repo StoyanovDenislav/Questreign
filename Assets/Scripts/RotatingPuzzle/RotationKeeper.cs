@@ -10,67 +10,68 @@ using UnityEngine.UI;
 public class RotationKeeper : MonoBehaviour
 {
     public List<Button> buttons = new List<Button>();
+    List<Button> buttonsInScene = new List<Button>();
     public List<int> rotations = new List<int>();
 
-    private string key = "image1RotatingPuzzle";
+    private string key = "image1";
 
     AsyncOperationHandle<Texture2D> targetImageHandle;
+
+    CheckTimeAndCompletion checkIfSolved { get; set; }
+
 
     // Start is called before the first frame update
     void Start()
     {
+        buttonsInScene = FindObjectsOfType<Button>().ToList();
+        StartCoroutine(ImageInstantiate());
         StartButtons();
+        checkIfSolved = FindObjectOfType<CheckTimeAndCompletion>();
+      
     }
+
 
     public void StartButtons()
     {
-        buttons = FindObjectsOfType<Button>().ToList();
+        foreach (var button in buttonsInScene)
+        {
+            if (button.CompareTag("RotatingPiecePuzzle"))
+            {
+                buttons.Add(button);
+            }
+        }
         buttons = buttons.OrderBy(go => go.name).ToList();
         for (int i = 0; i < buttons.Count; i++)
         {
             rotations.Add(0);
         }
+    }
 
-        Addressables.LoadAssetAsync<Texture2D>("image1RotatingPuzzle").Completed += op =>
+    public IEnumerator ImageInstantiate()
+    {
+        targetImageHandle = Addressables.LoadAssetAsync<Texture2D>(key);
+
+        yield return targetImageHandle;
+
+        if (targetImageHandle.Status == AsyncOperationStatus.Succeeded)
         {
-            if (op.Status == AsyncOperationStatus.Succeeded)
+            Texture2D pngTexture = targetImageHandle.Result;
+            Vector2Int sliceCount = new Vector2Int(3, 3);
+            int sliceWidth = pngTexture.width / sliceCount.x;
+            int sliceHeight = pngTexture.height / sliceCount.y;
+            for (int i = 0; i < buttons.Count; i++)
             {
-                Addressables.InstantiateAsync(key);
-                Debug.Log("Loaded key for image");
-                Texture2D[] splitTextures = new Texture2D[9];
+                int x = i % sliceCount.x;
+                int y = sliceCount.y - 1 - (i / sliceCount.x);
+                Rect sliceRect = new Rect(x * sliceWidth, y * sliceHeight, sliceWidth, sliceHeight);
+                Sprite sliceSprite = Sprite.Create(pngTexture, sliceRect, Vector2.zero);
 
-                
-
-                Texture2D originalImage = op.Result;
-
-
-// Calculate the width and height of each split
-                int splitWidth = originalImage.width / 3;
-                int splitHeight = originalImage.height / 3;
-
-// Loop through each split and extract its pixels from the original texture
-                for (int i = 0; i < 9; i++)
-                {
-                    int x = (i % 3) * splitWidth;
-                    int y = (i / 3) * splitHeight;
-                    Color[] pixels = originalImage.GetPixels(x, y, splitWidth, splitHeight);
-
-                    // Create a new texture for the split and set its pixels
-                    Texture2D splitTexture = new Texture2D(splitWidth, splitHeight);
-                    splitTexture.SetPixels(pixels);
-                    splitTexture.Apply();
-
-                    // Add the split texture to the arr
-
-                    splitTextures[i] = splitTexture;
-
-                    for (int f = 0; f < splitTextures.Length; f++)
-                    {
-                        buttons[f].GetComponent<SpriteRenderer>().sprite = Sprite.Create(splitTextures[f],
-                            new Rect(0, 0, splitTextures[f].width, splitTextures[f].height), new Vector2(0.5f, 0.5f));
-                    }
-                }
+                buttons[i].image.sprite = sliceSprite;
             }
-        };
+
+            yield return new WaitUntil(() => checkIfSolved.puzzleIsDone);
+
+            Addressables.Release(targetImageHandle);
+        }
     }
 }

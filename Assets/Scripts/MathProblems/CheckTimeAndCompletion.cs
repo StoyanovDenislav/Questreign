@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class CheckTimeAndCompletion : MonoBehaviour
@@ -21,8 +22,10 @@ public class CheckTimeAndCompletion : MonoBehaviour
         HelpersInScene = FindObjectOfType<helpersInScene>();
 
         SelectCharacter = FindObjectOfType<selectCharacter>();
+        
+        
 
-        if (PlayerPrefs.GetString("MainString") != null) NumberString = PlayerPrefs.GetString("MainString");
+        
     }
 
 

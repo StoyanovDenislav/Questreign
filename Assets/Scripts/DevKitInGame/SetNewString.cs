@@ -18,15 +18,11 @@ public class SetNewString : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return) && m_InputField.text.Length > 0)
         {
-            PlayerPrefs.SetString("MainString", m_InputField.text);
-            
-            PlayerPrefs.Save();
+            SaveSystem.SaveNumberString(m_InputField.text);
 
             _collectMistakes.GetMostMistakes();
 
             StartCoroutine(showText());
-            
-           
         }
     }
 
@@ -35,8 +31,7 @@ public class SetNewString : MonoBehaviour
         m_InputField.text = "Successfully set string: " + m_InputField.text;
 
         yield return new WaitForSeconds(3);
-        
-        m_InputField.text = "";
 
+        m_InputField.text = "";
     }
 }

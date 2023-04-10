@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
 public class CollectMistakes : MonoBehaviour
 {
-    private string mainString;
+    public string mainString;
 
     List<int> ints = new List<int>();
 
@@ -17,21 +18,14 @@ public class CollectMistakes : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //PlayerPrefs.DeleteAll();
-
-       // PlayerPrefs.SetString("MainString", "11111100022");
-
-
-        if (PlayerPrefs.GetString("MainString") != null)
+        if (File.Exists(Application.persistentDataPath + "/string.dat"))
         {
+            mainString = SaveSystem.LoadNumberString().stringData;
             GetMostMistakes();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    
 
     public void GetStringAndParse()
     {
@@ -72,7 +66,7 @@ public class CollectMistakes : MonoBehaviour
         ints.Clear();
         counts.Clear();
         sortedCounts = null;
-        mainString = PlayerPrefs.GetString("MainString");
+        mainString = SaveSystem.LoadNumberString().stringData;
         Debug.Log(mainString);
         GetStringAndParse();
         CountIntsAndFindMaxNum();
