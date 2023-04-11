@@ -9,7 +9,8 @@ using Random = UnityEngine.Random;
 public class RandomRotationButton : MonoBehaviour
 {
     List<float> rotations = new List<float>(){0,90,180,270};
-    List<Button> buttons = new List<Button>();
+   
+    public List<Button> buttons = new List<Button>();
     private float lastUsedRotation;
 
     void Start()

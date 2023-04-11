@@ -26,7 +26,7 @@ public class InstantiateTutorials : MonoBehaviour
 
     public void StartAdditionTutorial()
     {
-        key = keyArr[0];
+        key = keyArr[0];    
         StartCoroutine(TutorialInstantiate());
         
     }
@@ -47,7 +47,7 @@ public class InstantiateTutorials : MonoBehaviour
                 HasIntiated = true;
             }
 
-            currentTime += Time.deltaTime;
+            currentTime += Time.deltaTime; 
         }
     }
 

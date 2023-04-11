@@ -15,7 +15,7 @@ public class helpersInScene : MonoBehaviour
     [SerializeField] List<GameObject> spawnPos;
 
     [SerializeField] List<Sprite> sprites;
-    
+
     float max = 0.5f;
     float min = 0.2f;
 
@@ -48,7 +48,8 @@ public class helpersInScene : MonoBehaviour
 
     private void Update()
     {
-        triangle.transform.position = new Vector3(triangle.transform.position.x, Mathf.PingPong(Time.time*2,max-min)+min, triangle.transform.position.z);
+        triangle.transform.position = new Vector3(triangle.transform.position.x,
+            Mathf.PingPong(Time.time * 2, max - min) + min, triangle.transform.position.z);
     }
 
 
@@ -65,15 +66,14 @@ public class helpersInScene : MonoBehaviour
         }
     }
 
-   public void ChangeSelectedCharacter()
+    public void ChangeSelectedCharacter()
     {
         var firstHelper = helpersAvailableInScene[currentlySelectedCharacter].transform;
 
         triangle.transform.parent = firstHelper;
 
+
         triangle.transform.position = new Vector3(firstHelper.position.x,
             firstHelper.GetComponent<SpriteRenderer>().bounds.size.y / 2 - 2, 0);
     }
-   
-   
 }

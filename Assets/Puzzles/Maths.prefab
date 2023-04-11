@@ -1678,6 +1678,7 @@ GameObject:
   - component: {fileID: 297170771662049745}
   - component: {fileID: 297170771662049710}
   - component: {fileID: 297170771662049711}
+  - component: {fileID: 4429140679678614102}
   m_Layer: 5
   m_Name: Maths
   m_TagString: Untagged
@@ -1791,6 +1792,22 @@ MonoBehaviour:
   - {fileID: 297170772973380042}
   - {fileID: 297170771612707574}
   - {fileID: 297170772398288882}
+  m_InputField: {fileID: 0}
+  InputFieldAnswer: 0
+--- !u!114 &4429140679678614102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893045902973988550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bcb4baa9b10544b8240739c476dae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solveTime: 5
+  maxTime: 5
 --- !u!1 &7054832609506554361
 GameObject:
   m_ObjectHideFlags: 0
